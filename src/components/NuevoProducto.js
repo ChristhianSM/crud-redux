@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router'
 
 /* Actions de redux */
 import { crearNuevoProductoAction } from '../actions/productosActions'
 
 export const NuevoProducto = () => {
-    
+    const history = useHistory()
+
     // Utilizar useDispatch
     const dispatch = useDispatch();
 
@@ -39,7 +41,7 @@ export const NuevoProducto = () => {
         });
 
         // Redireccionar al home
-
+        history.push('/')
     }
 
     return (

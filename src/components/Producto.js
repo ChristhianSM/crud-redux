@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 // Redux
 import { useDispatch } from 'react-redux'
-import { eliminarProductoAction } from '../actions/productosActions'
+import { editarProductoAction, eliminarProductoAction } from '../actions/productosActions'
 import Swal from 'sweetalert2'
 
 export const Producto = ({producto}) => {
@@ -29,8 +29,10 @@ export const Producto = ({producto}) => {
               dispatch(eliminarProductoAction(id));      
             }
           })
+    }
 
-        
+    const editarProducto = (id) =>{
+        dispatch(editarProductoAction(id));
     }
 
     return (
@@ -43,6 +45,9 @@ export const Producto = ({producto}) => {
                 <Link 
                     to = {`/productos/editar/${id}`}
                     className = "btn btn-primary mr-2"
+                    onClick = {() => {
+                        editarProducto(id)
+                    }}
                 >Editar</Link>
                 <button
                     className = "btn btn-danger mr-2"

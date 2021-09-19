@@ -8,6 +8,9 @@ import {
     OBTENER_PRODUCTO_ELIMINAR,
     PRODUCTO_ELIMINADO_EXITO,
     PRODUCTO_ELIMINADO_ERROR,
+    OBTENER_PRODUCTO_EDITAR,
+    PRODUCTO_EDITADO_ERROR,
+    PRODUCTO_EDITADO_EXITO,
 
 } from "../types";
 
@@ -18,6 +21,7 @@ const initialState = {
     error: null,
     loading : false,
     productoEliminar : null,
+    productoEditar : null,
 }
 
 export default  function(state = initialState, action) {
@@ -80,6 +84,33 @@ export default  function(state = initialState, action) {
             return {
                 ...state,
                 error : action.payload,
+            }
+
+        case OBTENER_PRODUCTO_EDITAR:
+            return {
+                ...state,
+                productoEditar : state.productos.find(producto => producto.id === action.payload),
+                loading : true,
+            }
+
+        case PRODUCTO_EDITADO_EXITO:
+            return {
+                ...state,
+                productos: state.productos.map(producto => {
+                    if (producto.id === action.payload.id) {
+                        return action.payload
+                    }else{
+                        return producto
+                    }
+                }),
+                error: null, 
+                productoEditar: null  
+            }
+
+        case PRODUCTO_EDITADO_ERROR:
+            return {
+                ...state,
+                error: true,
             }
         
     

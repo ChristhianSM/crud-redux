@@ -1,4 +1,4 @@
-import { AGREGAR_PRODUCTO, AGREGAR_PRODUCTO_ERROR, AGREGAR_PRODUCTO_EXITO, COMENZAR_DESCARGAS_PRODUCTOS, DESCARGA_PRODUCTOS_ERROR, DESCARGA_PRODUCTOS_EXITO, OBTENER_PRODUCTO_ELIMINAR, PRODUCTO_ELIMINADO_ERROR, PRODUCTO_ELIMINADO_EXITO } from "../types";
+import { AGREGAR_PRODUCTO, AGREGAR_PRODUCTO_ERROR, AGREGAR_PRODUCTO_EXITO, COMENZAR_DESCARGAS_PRODUCTOS, DESCARGA_PRODUCTOS_ERROR, DESCARGA_PRODUCTOS_EXITO, OBTENER_PRODUCTO_EDITAR, OBTENER_PRODUCTO_ELIMINAR, PRODUCTO_EDITADO_ERROR, PRODUCTO_EDITADO_EXITO, PRODUCTO_ELIMINADO_ERROR, PRODUCTO_ELIMINADO_EXITO } from "../types";
 import clienteAxios from '../config/axios'
 import Swal from "sweetalert2";
 
@@ -109,4 +109,42 @@ const eliminarProductoExito = () => ({
 const eliminarProductoError = () => ({
     type: PRODUCTO_ELIMINADO_ERROR,
     payload: true
+})
+
+// Funcion para editar un producto
+export function editarProductoAction(id, producto = {}){
+    return async dispatch => {
+        dispatch(obtenerEditarProducto(id));
+        
+        try {
+
+            if (Object.keys(producto).length === 0) return;
+            await clienteAxios.put(`/productos/${id}`, producto);
+            dispatch(editarProductoExito(producto));
+
+            // Mostrar Alerta exito
+            Swal.fire(
+                'Correcto',
+                'El producto se actualizo Correctamente',
+                'success'
+            )
+
+        } catch (error) {
+            dispatch(editarProductoError());
+        }
+    }
+}
+
+const obtenerEditarProducto = (id) => ({
+    type: OBTENER_PRODUCTO_EDITAR,
+    payload: id
+})
+
+const editarProductoExito = (productoEditado) => ({
+    type: PRODUCTO_EDITADO_EXITO,
+    payload : productoEditado
+})
+
+const editarProductoError = () => ({
+    type: PRODUCTO_EDITADO_ERROR
 })
