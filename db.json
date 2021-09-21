@@ -1,11 +1,6 @@
 {
   "productos": [
     {
-      "nombre": "Tek",
-      "precio": "50",
-      "id": 1
-    },
-    {
       "nombre": "Cristina (lorma)",
       "precio": 12,
       "id": 2
@@ -14,6 +9,26 @@
       "nombre": "123",
       "precio": 1000,
       "id": 3
+    },
+    {
+      "nombre": "Tekilla",
+      "precio": 1200,
+      "id": 4
+    },
+    {
+      "nombre": "Christhian",
+      "precio": 20000,
+      "id": 5
+    },
+    {
+      "nombre": "Christhian",
+      "precio": 1000,
+      "id": 6
+    },
+    {
+      "nombre": "Cristina (lorma)",
+      "precio": 100,
+      "id": 7
     }
   ]
 }

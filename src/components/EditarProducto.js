@@ -21,8 +21,6 @@ export const EditarProducto = () => {
         id
     })
 
-    if (nombre === null ) return;
-
     const handleActualizarProducto = (e) => {
         e.preventDefault();
 
